@@ -1,0 +1,5 @@
+#if($issueKey)
+    $i18nManager.getText($locale, "git.email.commits.title.issue", $issueKey, $issueSummary)
+#else
+    $i18nManager.getText($locale, "git.email.commits.title.repo", $repoName)
+#end

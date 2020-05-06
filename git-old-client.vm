@@ -1,0 +1,8 @@
+##$gp-old-git-client
+
+#set($header = "<b>$username</b>")
+#set($helloHtml = $i18nManager.getText($locale, "bbb.gp.notification.hello.user", $header))
+<p>$helloHtml</p>
+<p>$i18nManager.getText($locale, "bbb.gp.notification.old.git.body1", $baseUrl)</p>
+<p>$i18nManager.getText($locale, "bbb.gp.notification.old.git.body2")</p>
+<p>$i18nManager.getText($locale, "bbb.gp.notification.old.git.body4", $baseUrl)</p>
