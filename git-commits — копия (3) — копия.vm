@@ -1,0 +1,232 @@
+##$gp-commit
+#parse("/templates/plugins/git/datespan.vm")
+#set($gp-data-block = "width: 700px; background: #fff;border-bottom: 1px solid #ccc;padding: 10px;")
+#set($gp-blocklink = "display: block;color:inherit;text-decoration:inherit;font:inherit;font-size: 100%;")
+### TODO: get it back in GIT-1017
+### #set($gp-commit-avatar = "border:1px solid #e7e7e7;float: left;height: 32px;padding: 2px;width: 32px;")
+#set($gp-commit-body = "margin-left: 50px;")
+#set($gp-panel-title = "font-size:14px;font-weight:bold;margin-bottom:10px;padding-left:5px;")
+#set($gp-commit-user = "margin-right: 10px;")
+#set($gp-light = "font-size:12px;font-weight:normal;color: #aeaeae;")
+#set($gp-panel-arrow = "background-image: url('images/gp-panel-bubblecorner.png');background-repeat: no-repeat;border-bottom: 1px solid #f7f7f7;height: 9px;margin-left: 12px;margin-top: -7px;position: absolute;width: 17px;")
+
+#set($gp-panel = "background-color: #f7f7f7;border: 1px solid #ddd;-webkit-border-radius: 3px 3px 3px 3px;-moz-border-radius: 3px 3px 3px 3px;border-radius: 3px 3px 3px 3px;color: #747474;font-size: 13px;padding: 7px 5px 5px 5px;-webkit-box-shadow: 0 1px 0 #fff inset;-moz-box-shadow: 0 1px 0 #fff inset;box-shadow: 0 1px 0 #fff inset;")
+#set($gp-commit-header = "min-height: 37px;position: relative;")
+
+#set($gp-commit-text = "margin-right: 165px;padding: 8px 0 5px 2px;")
+
+#set($gp-content = "background-color: #fefefe;border: 1px solid #ddd;-webkit-border-radius: 3px 3px 3px 3px;-moz-border-radius: 3px 3px 3px 3px;border-radius: 3px 3px 3px 3px;-webkit-box-shadow: 0 1px 0 #fff, 0px 1px 0 #f1f1f1 inset;-moz-box-shadow: 0 1px 0 #fff, 0px 1px 0 #f1f1f1 inset;box-shadow: 0 1px 0 #fff, 0px 1px 0 #f1f1f1 inset;color: #747474;font-size: 14px;overflow: hidden;padding: 10px 10px 3px;")
+#set($gp-commit-source = "float: left;margin: 0 20px 10px 0;color:#747474;")
+#set($gp-icon-line = "background-repeat: no-repeat;line-height: 16px;")
+
+#set($gp-repository = "background-image: url('images/repository.png');")
+#set($gp-branch = "background-image: url('images/branch.png');")
+#set($gp-revision = "background-image: url('images/revision.png');")
+
+#set($gp-clear = "clear: both;")
+
+#set($gp-content-item = "margin-bottom: 7px;")
+
+
+#set($gp-count = "display: inline-block;font-size: 12px;margin-top: 1px;line-height: 1.2;text-align: center;")
+#set($gp-count-left-gap = "width: 136px; $gp-count")
+#set($gp-count-div =    "border-color: #fff;
+                        border-style: solid;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        border-bottom-width:1px;
+                        border-top-width:1px;
+                        padding: 0 2px;")
+#set($gp-count-center =  $gp-count-div + "border-top-width:1px;
+                        border-bottom-width:1px;
+                        border-left-width:0;
+                        border-right-width:0;
+                        min-width: 40px;")
+
+#set ($gp-left-radius = "border-top-left-radius: 3px;border-bottom-left-radius: 3px;")
+#set ($gp-right-radius = "border-top-right-radius: 3px;border-bottom-right-radius: 3px;")
+
+#set($gp-count-left = $gp-count-div + $gp-left-radius + "border-left-width:1px;border-right-width:1px;min-width: 40px;")
+
+#set($gp-count-right = $gp-count-div + $gp-right-radius + "border-right-width: 1px;border-left-width:1px;min-width: 40px;")
+
+#set($gp-count-left-big =  $gp-count-div + $gp-left-radius + "border-left-width:0;border-right-width:1px;min-width: 80px;")
+#set($gp-count-right-big = $gp-count-div + $gp-right-radius + "border-right-width: 1px;border-left-width:0;min-width: 80px;")
+
+#set($gp-red = "background-color: #fdd;border-color: #e16161;color: #c33;")
+#set($gp-green = "background-color: #cfc;border-color: #282;color: #282;")
+
+#set($gp-yellow = "background-color: #ffd;border-color: #767614;color: #767614;")
+
+#set($gp-content-item-hosting = "margin-top: 2px;padding-left:25px;")
+#set($gp-commit-totals = "padding-top: 7px;border-top: 1px solid #ccc;")
+
+#set($gp-content-item-name = "margin-left: 125px;word-wrap: break-word;")
+
+#set($bbb-gp-codereview-commit__external-file-link-container = "font-size: smaller;")
+
+#set($gp-icon-prefix = "$contextPath/download/resources/com.xiplink.jira.git.jira_git_plugin:git-plugin-images-resource/images")
+#set($gp-icon-commit-url = "$gp-icon-prefix/octicon-git-commit.png")
+#set($gp-icon-branch-url = "$gp-icon-prefix/octicon-git-branch.png")
+#set($gp-icon-repo-url = "$gp-icon-prefix/octicon-repo.png")
+#set($gp-icon-style = "width:16px;height:16px;vertical-align:bottom;")
+#set($gp-message-info-style = "background:#fff; border:#3572b0 1px solid; border-radius:3px; line-height:20px; padding:20px 40px; color:#000;")
+
+#if($issueKey)
+    #set($gp-mail-title-html = $i18nManager.getText($locale, "git.email.commits.body.title.issue", "<a href='$contextPath/browse/$issueKey'>$issueSummary</a>", "<a href='$contextPath/browse/$issueKey'>$issueKey</a>"))
+#else
+    #set($gp-mail-title-html = $i18nManager.getText($locale, "git.email.commits.body.title.repo", $repoName))
+#end
+
+#macro(tail $str $len)
+#set($l = $str.length())
+#set($start = $l - $len)
+$str.substring($start)
+#end
+
+<h3 style="text-align:center;font-family: Arial, sans-serif;">$gp-mail-title-html</h3>
+
+#foreach($commit in $commits)
+    <div style="$gp-data-block;font-family: Arial, sans-serif;">
+### TODO: get it back in GIT-1017
+###        #if ($commit.author.isAJiraUser())
+###        <a href="$commit.author.profileUrl" style="$gp-blocklink;$gp-commit-avatar">
+###            <img src="$commit.author.avatarUrl" width="32" height="32">
+###        </a>
+###        #else
+###            <img src="$commit.author.avatarUrl" width="32" height="32" style="$gp-blocklink;$gp-commit-avatar">
+###        #end
+        <div style="$gp-commit-body">
+            <div style="$gp-panel-title">
+                #if ($commit.author.isAJiraUser())
+                    <a href="$commit.author.profileUrl" style="$gp-commit-user">$commit.author.displayName</a>
+                #else
+                    $!{commit.author.displayName}
+                #end
+                <span style="$gp-light">#datespanEmail($commit)</span>
+            </div>
+            <div style="$gp-panel-arrow"></div>
+            <div style="$gp-panel">
+                <div style="$gp-commit-header">
+                    <div style="$gp-commit-text">$commit.getLinkedLogMessageHtml()</div>
+                </div>
+                <div style="$gp-content">
+                    <div style="$gp-commit-source;$gp-icon-line;$gp-repository">
+                        <img style="$gp-icon-style" width="16" height="16" src="$gp-icon-repo-url">
+                        #if($commit.repository.gitViewerEnabled)
+                            <a href="$contextPath/secure/bbb.gp.gitviewer.BrowseGit.jspa?repoId=$commit.repository.repoId"
+                                class="bbb-gp-codereview-commit__repo-link"
+                                >$commit.repository.displayName</a>
+                        #else
+                            $commit.repository.displayName
+                        #end
+                    </div>
+                    <div style="$gp-commit-source;$gp-icon-line;$gp-branch">
+                        #foreach ($branch in $commit.branches)
+                            <img style="$gp-icon-style" width="16" height="16" src="$gp-icon-branch-url">
+                            #if($commit.repository.gitViewerEnabled)
+                                <a href="$branch.url"
+                                    >$branch.name</a>#if($velocityCount != $commit.branches.size()),#end
+                            #else
+                                $branch.name#if($velocityCount != $commit.branches.size()),#end
+                            #end
+                        #end
+                    </div>
+                    <div style="$gp-commit-source;$gp-icon-line;$gp-revision">
+                        <img style="$gp-icon-style" width="16" height="16" src="$gp-icon-commit-url">
+                        #if($commit.repository.gitViewerEnabled)
+                            <a href="$contextPath/secure/bbb.gp.gitviewer.Commit.jspa?commitId=$commit.commitId&repoId=$commit.repository.repoId&path="
+                                >$commit.commitId</a>
+                        #else
+                            $commit.commitId
+                        #end
+                        #if($commit.repository.hasLinkRenderer())
+                            #if($commit.repository.linkRenderer.getName())
+                                #set($serviceName=$commit.repository.linkRenderer.getName())
+                            #else
+                                #set($serviceName=$i18nManager.getText($locale, "git.linkformat.default.name"))
+                            #end
+                            <span style="$bbb-gp-codereview-commit__external-file-link-container">$commit.repository.linkRenderer.getRevisionLinkHtml($commit, $serviceName)</span>
+                        #end
+                    </div>
+                    <div style="$gp-clear"></div>
+                    #set($position=0)
+                    #foreach ($file in $commit.files)
+                    <div style="$gp-content-item">
+                        <div style="$gp-count">
+                        ##this line is packed to avoid extra space between
+                        #if ($file.deleted)<div style="$gp-count-left-big;$gp-red" title="$file.linesDeleted">$i18nManager.getText($locale, "git.issue-tab.lines.deleted")</div><div style="$gp-count-right;$gp-red" title="$i18nManager.getText($locale, "git.issue-tab.lines.deleted")">$file.linesDeleted</div>#elseif($file.added)<div style="$gp-count-left;$gp-green" title="$i18nManager.getText($locale, "git.issue-tab.lines.added")">$file.linesAdded</div><div style="$gp-count-right-big;$gp-green" title="$file.linesAdded"> $i18nManager.getText($locale, "git.issue-tab.lines.added")</div>#else<div style="$gp-count-left;$gp-green" title="$i18nManager.getText($locale, "git.issue-tab.lines.added")">$file.linesAdded</div><div style="$gp-count-center;$gp-yellow" title="$i18nManager.getText($locale, "git.issue-tab.lines.changed")">$file.linesChanged</div><div style="$gp-count-right;$gp-red" title="$i18nManager.getText($locale, "git.issue-tab.lines.deleted")">$file.linesDeleted</div>#end
+                        </div>
+                        <span style="padding-left:25px;">
+                            #set($lenToTruncate = 43)
+                            #set($truncatedLen = 40)
+                            #if($file.getPath().length() > $lenToTruncate)
+                                ...#tail($file.getPath(), $truncatedLen)
+                            #else
+                                $file.getPath()
+                            #end
+                        </span>
+                        #if($commit.repository.hasLinkRenderer())
+                            #set($diff=$commit.getDiffEntryByFileInfo($file))
+                            #if($commit.repository.linkRenderer.hasChangePathFormat($diff))
+                                #if($commit.repository.linkRenderer.getName())
+                                    #set($serviceName=$commit.repository.linkRenderer.getName())
+                                #else
+                                    #set($serviceName=$i18nManager.getText($locale, "git.linkformat.default.name"))
+                                #end
+                                <span style="$bbb-gp-codereview-commit__external-file-link-container">
+                                    <a href="$commit.repository.linkRenderer.getChangePathLinkHtml($commit, $diff, $position)"
+                                        target="_blank"
+                                        class="bbb-gp-codereview-commit__external-link"
+                                        title="$i18nManager.getText($locale, "git.linkformat.view.files.at", $serviceName)"
+                                        >$serviceName
+                                        <span class="bbb-gp-codereview-commit__external-link-icon octicon octicon-file-symlink-file"></span></a>
+                                    #set($position=$position+1)
+                                </span>
+                            #end
+                        #end
+                        <div style="$gp-clear"></div>
+                    </div>
+                    #end
+
+                    #if ($commit.moreFilesCount > 0)
+                        <div style="$gp-content-item">
+                            <div style="$gp-count-left-gap"></div>
+                            <a href="$contextPath/secure/bbb.gp.gitviewer.Commit.jspa?commitId=$commit.commitId&repoId=$commit.repository.repoId&path="
+                               style="padding-left:25px;"
+                               >$i18nManager.getText($locale, 'git.issue.commits-tab.num-more-dots', $commit.moreFilesCount)</a>
+                               <div style="$gp-clear"></div>
+                        </div>
+                    #end
+
+                    #if ($commit.files.size() > 1)
+                    <div style="$gp-content-item;$gp-commit-totals">
+                        <div style="$gp-count">
+                            <div style="$gp-count-left;$gp-green" title="$i18nManager.getText($locale, "git.issue-tab.lines.total-added")">$commit.linesTotals.linesAdded</div><div style="$gp-count-center;$gp-yellow" title="$i18nManager.getText($locale, "git.issue-tab.lines.total-changed")">$commit.linesTotals.linesChanged</div><div style="$gp-count-right;$gp-red" title="$i18nManager.getText($locale, "git.issue-tab.lines.total-deleted")">$commit.linesTotals.linesDeleted</div>
+                        </div>
+                        <div style="$gp-content-item-name"></div>
+                        <div style="$gp-clear"></div>
+                    </div>
+                    #end
+                </div>
+            </div>
+        </div>
+    </div>
+#end
+
+#if($moreCommitsCount > 0)
+    <div style="$gp-data-block">
+        <div style="$gp-commit-body">
+            <div style="$gp-message-info-style">
+                #if($issueKey)
+                    #set($moreCommitsUrl = "$contextPath/browse/$issueKey?page=com.xiplink.jira.git.jira_git_plugin:git-commits-tabpanel")
+                #else
+                    #set($moreCommitsUrl = "$contextPath/secure/bbb.gp.gitviewer.Commits.jspa?repoId=$repoId")
+                #end
+                <a href="$moreCommitsUrl">$i18nManager.getPluralText('git.issue.commits-tab.num-more-commits', $moreCommitsCount)</a>
+            </div>
+        </div>
+    </div>
+#end
