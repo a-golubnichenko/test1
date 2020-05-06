@@ -1,0 +1,1 @@
+$i18nManager.getText($locale, "bbb.gp.notification.comment.commented-by", $author, $i18nManager.getText($locale, "bbb.gp.codereview.review-issue-tab.commit-comment-link", $commitId))
